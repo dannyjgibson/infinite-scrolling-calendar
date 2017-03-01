@@ -1,0 +1,8 @@
+intranet-calendar
+---
+an internal calendar app that reads events from <insert endpoint>
+
+built with
+*knockout
+*bootstrap
+*less css
