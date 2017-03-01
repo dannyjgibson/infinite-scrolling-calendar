@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../styles/css/intranet-calendar.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-debug.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+</head>
+
+<body data-bind="event: {scroll: scrolled}">
+  <div class="top-information">
+    <div class="toggle text-left">
+      <button class="btn btn-default btn-sm active" id="1" title="normal-events">
+        <i class="fa fa-square"></i> Normal Events (<span data-bind="text: $root.counts()['normal-events'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm active" id="2" title="vacation">
+        <i class="fa fa-suitcase"></i> Vacation (<span data-bind="text: $root.counts()['vacation'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm active" id="3" title="holidays">
+        <i class="fa fa-gift"></i> Holidays (<span data-bind="text: $root.counts()['holidays'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm active" id="4" title="project-milestones">
+        <i class="fa fa-area-chart"></i> Project Milestones (<span data-bind="text: $root.counts()['project-milestones'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm active" id="5" title="birthdays">
+        <i class="fa fa-birthday-cake"></i> Birthdays (<span data-bind="text: $root.counts()['birthdays'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm active" id="6" title="anniversaries">
+        <i class="fa fa-briefcase"></i> Anniversaries (<span data-bind="text: $root.counts()['anniversaries'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm" id="7" title="group-events">
+        <i class="fa fa-building"></i> Group Events (<span data-bind="text: $root.counts()['group-events'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm" id="8" title="sick-days">
+        <i class="fa fa-stethoscope"></i> Sick days (<span data-bind="text: $root.counts()['sick-days'] || 0"></span>)
+      </button>
+      <button class="btn btn-default btn-sm" id="9" title="work-from-home">
+        <i class="fa fa-home"></i> Work From Home (<span data-bind="text: $root.counts()['work-from-home'] || 0"></span>)
+      </button>
+    </div>
+    <div class="calendar header">
+      <div class="text-center">
+        <button class="btn btn-default btn-xs" data-bind="text: previousMonthToDisplay, click: previousMonth">Previous Month</button>
+        <span class="month-title" data-bind="text: currentMonthToDisplay">Current Month</span>
+        <button class="btn btn-default btn-xs" data-bind="text: nextMonthToDisplay, click: nextMonth">Next Month</button>
+      </div>
+      <table class="weekday-names">
+        <tr class="weekday text-center">
+          <td class="td0 weekend"><div>Sunday</div></td>
+          <td class="td1"><div>Monday</div></td>
+          <td class="td2"><div>Tuesday</div></td>
+          <td class="td3"><div>Wednesday</div></td>
+          <td class="td4"><div>Thursday</div></td>
+          <td class="td5"><div>Friday</div></td>
+          <td class="td6 weekend"><div>Saturday</div></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="calendar">
+  <table class="table table-bordered table-responsive">
+    <tbody class="days" data-bind="foreach: weeks()">
+      <tr class="data" data-bind="foreach: $data">
+        <td data-bind="attr: {class: 'day-'+$index(), id: $data}, css: { weekend: ($index() === 0 || $index() === 6) }, css: $root.firstOfMonth($data)">
+          <div class="day" data-bind="css: $root.weekendOrToday($data, $index())">
+            <div class="fields">
+              <div class="label" data-bind="text: $root.labelDay($data)"></div>
+              <div class="items">
+                <ul data-bind="foreach: $root.timestampsWithItems()[$data]">
+                  <li data-bind="attr: {class: type}">
+                    <span class="event" data-bind="text: plaintext"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <script type="text/javascript" src="../scripts/DateUtils.js">
+  </script>
+  <script type="text/javascript" src="../scripts/Types.js">
+  </script>
+
+
+  <script type="text/javascript" src="../scripts/DateViewModel.js">
+    ko.applyBindings(DateViewModel);
+  </script>
+
+  <script src="../scripts/jquery/calendar-interaction.js" type="text/javascript"></script>
+</body>

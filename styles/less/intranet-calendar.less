@@ -1,0 +1,254 @@
+@light-blue-calendar-background: #afbfdf;
+@light-blue-top-info-background: #97b1ef;
+@dark-blue-border: #34497d;
+@light-grey-background: #e8eefc;
+@green-today-background: #348d49;
+@grey-weekend-background: #444454;
+@dark-grey-weekend-label-background: #848494;
+
+.toggle {
+  margin: 10px;
+}
+body {
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+  font-size: 14px;
+}
+.top-information {
+  position: fixed;
+  width: 100%;
+  background-color: @light-blue-top-info-background;
+  z-index: 9999;
+  border: 1px solid @dark-blue-border;
+
+  .text-center {
+    border-top: 1px solid black;
+  }
+  button {
+    &.btn.btn-default {
+      &.active {
+        background-color: @light-grey-background;
+      }
+      &.hover {
+        background-color: @light-blue-calendar-background;
+      }
+    }
+  }
+}
+.calendar {
+  .month-title {
+    padding: 0 35%;
+  }
+  &.header {
+    background-color: @light-grey-background;
+  }
+  table {
+    display: table;
+    width: 100%;
+
+    &.weekday-names {
+      @media (max-width:700px) {
+        display: none;
+      }
+      tbody {
+        margin-bottom: 5px;
+
+        td {
+          min-width: 14%;
+
+          &.td6 {
+            min-width: 15%;
+          }
+        }
+      }
+    }
+    tbody {
+      &.days {
+        display: block;
+        height: 845px;
+      }
+    }
+    .weekday {
+      color: @light-grey-background;
+      background-color: @dark-blue-border;
+    }
+    .today {
+      background-color: @green-today-background;
+    }
+    .days {
+      .data {
+        overflow: auto;
+
+        &.first-week-of-month {
+          td {
+            border-bottom: 3px solid @dark-blue-border;
+          }
+        }
+        td {
+          padding: 4px;
+          min-width: 14.1%;
+
+          &:not([id]) {
+            visibility: hidden;
+          }
+          &.first-of-month {
+            border-left: 3px solid @dark-blue-border;
+            border-top: 3px solid @dark-blue-border;
+            border-bottom: none !important;
+
+            ~ td {
+              border-top: 3px solid @dark-blue-border;
+              border-bottom: none !important;
+            }
+          }
+          &.day-6 {
+            min-width: 15%;
+          }
+          .day {
+            max-width: 235px;
+            min-height: 160px;
+            height: 100%;
+            border-radius: 0.25em;
+            background-color: @dark-blue-border;
+            overflow: hidden;
+
+            &.today {
+              background-color: @green-today-background;
+            }
+            &.weekend {
+              background-color: @grey-weekend-background;
+            }
+            .label {
+              display: block;
+              margin-left: 5%;
+              margin-right: 5%;
+              min-width: 80%;
+              background-color: @dark-grey-weekend-label-background;
+            }
+            .items {
+              color: #fff;
+
+              ul {
+                list-style: none;
+                padding-left: 10px;
+
+                li {
+                  position: relative;
+
+                  &.group-events {
+                    display: none;
+                  }
+                  &.sick-days {
+                    display: none;
+                  }
+                  &.work-from-home {
+                    display: none;
+                  }
+                }
+                .normal-events:before {
+                  content: "\f0c8";
+                  //square
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .vacation:before {
+                  content: "\f0f2";
+                  // suitcase
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .holidays:before {
+                  content: "\f06b";
+                  // gift
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .project-milestones:before {
+                  content: "\f1fe";
+                  // area-chart
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .birthdays:before {
+                  content: "\f1fd";
+                  // birthday-cake
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .anniversaries:before {
+                  content: "\f0b1";
+                  // briefcase
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .group-events:before {
+                  content: "\f1ad";
+                  // building
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .sick-days:before {
+                  content: "\f0f1";
+                  // stethoscope
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+                .work-from-home:before {
+                  content: "\f015";
+                  // home
+                  font-family: FontAwesome;
+                  font-style: normal;
+                  font-weight: normal;
+                  text-decoration: inherit;
+                }
+              }
+            }
+          }
+          .new-item-area {
+            &.active {
+              min-height: 20px;
+            }
+            form {
+              .form-control {
+                border-radius: 0 0 0.25em 0.25em;
+                background-color: @dark-blue-border;
+                color: @light-grey-background;
+
+                &::-webkit-input-placeholder {
+                  color: @light-grey-background;
+                }
+                &::-moz-placeholder {
+                  color: @light-grey-background;
+                }
+                &:-moz-placeholder {
+                  color: @light-grey-background;
+                }
+                &:-ms-input-placeholder {
+                  color: @light-grey-background;
+                }
+              }
+              &.hidden {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
